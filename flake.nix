@@ -37,7 +37,7 @@
 
             shellHook = ''
               export IN_NIX_ZSH=1
-              export DOTFILES_DIR="$PWD/.dotfiles"
+              export DOTFILES_DIR="${toString self}/.dotfiles"
               export ZDOTDIR="$DOTFILES_DIR/zsh"
 
               export OMZ_DIR="${pkgs.oh-my-zsh}/share/oh-my-zsh"
