@@ -5,7 +5,7 @@
 * You may want to add `experimental-features = nix-command flakes` to your `~/.config/nix/nix.conf`
 
 ## Running locally
-* In case you checked out this repo locally, you can run `nix-shell` to start the shell
+* In case you checked out this repo locally, you can run `nix develop` to start the shell
 
 ## Running remotely
 * You can also start this dev shell without checking it out by running `nix develop github:bjurkovski/dotfiles`

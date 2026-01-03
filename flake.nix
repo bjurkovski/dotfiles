@@ -37,9 +37,27 @@
 
             shellHook = ''
               export IN_NIX_ZSH=1
-              export DOTFILES_DIR="${toString self}/.dotfiles"
-              export ZDOTDIR="$DOTFILES_DIR/zsh"
 
+              # Read-only dotfiles content (flake source)
+              export DOTFILES_DIR="${toString self}/.dotfiles"
+
+              # Writable zsh runtime dir (outside /nix/store)
+              export ZDOTDIR="''${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles-zsh"
+              mkdir -p "$ZDOTDIR"
+
+              # Make zsh use the repo's nix-shell zshrc
+              ln -sf "$DOTFILES_DIR/zsh/.zshrc" "$ZDOTDIR/.zshrc"
+
+              # Point zsh state to writable locations
+              export ZSH_CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+              mkdir -p "$ZSH_CACHE_DIR"/{sessions,compdump} 2>/dev/null
+              export ZSH_SESSION_DIR="$ZSH_CACHE_DIR/sessions"
+              export ZSH_COMPDUMP="$ZSH_CACHE_DIR/compdump/zcompdump-$ZSH_VERSION"
+              export HISTFILE="$ZSH_CACHE_DIR/history"
+              export HISTSIZE=10000
+              export SAVEHIST=10000
+
+              # Nix-provided paths
               export OMZ_DIR="${pkgs.oh-my-zsh}/share/oh-my-zsh"
               export ZSH_AUTOSUGGESTIONS_DIR="${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions"
               export ZSH_SYNTAX_HIGHLIGHTING_DIR="${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting"
