@@ -1,2 +1,3 @@
-.gitconfig.nix-shell
-.zsh-nix-shell
+.zsh_history
+.zsh_sessions
+.zcompdump-*
