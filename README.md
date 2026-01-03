@@ -1,6 +1,6 @@
 # dotfiles
 
-**One-off setup:**
+## One-off Setup
 * Follow the [Nix Download Instructions](https://nixos.org/download/) if you haven't already installed it
 * You may want to add `experimental-features = nix-command flakes` to your `~/.config/nix/nix.conf`
 
